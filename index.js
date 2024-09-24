@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const routerAuth = require('./router/authRouter');
 
 dotenv.config();  // Load environment variables
 
@@ -14,6 +15,8 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
+
+app.use("/api/users",routerAuth);
 
 const ip = "192.168.137.1";
 const port = process.env.PORT || 3000; 
