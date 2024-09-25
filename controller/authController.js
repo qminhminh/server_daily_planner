@@ -64,11 +64,11 @@ module.exports = {
             }
     
             const userToken = jwt.sign({
-                id: user._id, userType: user.userType, email: user.email, fcm: user.fcm,
+                id: user._id, email: user.email,
             }, process.env.JWT_SEC, { expiresIn: "21d" });
     
-            const { password, otp, ...others } = user._doc;
-    
+            const { password, ...others } = user._doc;
+            console.log(userToken);
             res.status(200).json({ ...others, userToken });
         } catch (error) {
             res.status(500).json({ status: false, message: error.message });
